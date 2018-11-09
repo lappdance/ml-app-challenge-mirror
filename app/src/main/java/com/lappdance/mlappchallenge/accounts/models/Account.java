@@ -15,9 +15,25 @@ public class Account {
 
     @Keep
     @SerializedName("account_number")
-    private int number;
+    private String number;
 
     @Keep
     @SerializedName("balance")
     private double balance;
+
+    public int getId() {
+        return id;
+    }
+
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
 }
