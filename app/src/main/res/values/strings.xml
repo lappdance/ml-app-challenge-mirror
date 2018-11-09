@@ -2,4 +2,5 @@
     <string name="app_name">ml-app-challenge</string>
 
     <string name="splash_open">Open</string>
+    <string name="accounts_myAccounts">My Accounts</string>
 </resources>
