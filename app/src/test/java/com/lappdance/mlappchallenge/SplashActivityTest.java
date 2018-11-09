@@ -4,7 +4,7 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.widget.Button;
 
-import com.lappdance.mlappchallenge.authentication.UserSession;
+import com.lappdance.mlappchallenge.authentication.DiskBasedUserRepository;
 
 import org.junit.After;
 import org.junit.Before;
@@ -20,7 +20,6 @@ import org.robolectric.shadows.ShadowActivity;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsNull.notNullValue;
 import static org.junit.Assert.assertThat;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
 import static org.robolectric.Shadows.shadowOf;
@@ -31,29 +30,29 @@ public class SplashActivityTest {
     private ActivityController<SplashActivity> mController;
 
     @Mock
-    private UserSession mNoSession;
+    private DiskBasedUserRepository mNoSession;
 
     @Mock
-    private UserSession mActiveSession;
+    private DiskBasedUserRepository mActiveSession;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        doReturn(false).when(mNoSession).isLoggedIn();
-        doReturn(true).when(mActiveSession).isLoggedIn();
+        doReturn(false).when(mNoSession).loadLoginValue();
+        doReturn(true).when(mActiveSession).loadLoginValue();
 
         mController = Robolectric.buildActivity(SplashActivity.class);
     }
 
     @After
     public void tearDown() {
-        UserSession.setInstance(null);
+        DiskBasedUserRepository.setInstance(null);
     }
 
     @Test
     public void onCreate_loadsView() {
-        UserSession.setInstance(mNoSession);
+        DiskBasedUserRepository.setInstance(mNoSession);
         mController.setup();
 
         final Button openButton = mController.get().findViewById(R.id.open);
@@ -63,7 +62,7 @@ public class SplashActivityTest {
 
     @Test
     public void onCreate_opensActivity() {
-        UserSession.setInstance(mActiveSession);
+        DiskBasedUserRepository.setInstance(mActiveSession);
         mController.setup();
 
         assertOpenedAccountActivity();
@@ -71,7 +70,7 @@ public class SplashActivityTest {
 
     @Test
     public void onCreate_finishesActivity() {
-        UserSession.setInstance(mActiveSession);
+        DiskBasedUserRepository.setInstance(mActiveSession);
         mController.setup();
 
         assertActivityIsFinished();
@@ -79,7 +78,7 @@ public class SplashActivityTest {
 
     @Test
     public void openButton_clicked_opensAccountActivity() {
-        UserSession.setInstance(mNoSession);
+        DiskBasedUserRepository.setInstance(mNoSession);
         mController.setup();
 
         final Button openButton = mController.get().findViewById(R.id.open);
@@ -90,7 +89,7 @@ public class SplashActivityTest {
 
     @Test
     public void openButton_clicked_finishesActivity() {
-        UserSession.setInstance(mNoSession);
+        DiskBasedUserRepository.setInstance(mNoSession);
         mController.setup();
 
         final Button openButton = mController.get().findViewById(R.id.open);
@@ -101,13 +100,13 @@ public class SplashActivityTest {
 
     @Test
     public void openButton_clicked_createsSession() {
-        UserSession.setInstance(mNoSession);
+        DiskBasedUserRepository.setInstance(mNoSession);
         mController.setup();
 
         final Button openButton = mController.get().findViewById(R.id.open);
         openButton.performClick();
 
-        verify(mNoSession).setLoggedIn(eq(true));
+        verify(mNoSession).login();
     }
 
     private void assertOpenedAccountActivity() {

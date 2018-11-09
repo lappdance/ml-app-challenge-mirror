@@ -6,7 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 
-import com.lappdance.mlappchallenge.authentication.UserSession;
+import com.lappdance.mlappchallenge.authentication.DiskBasedUserRepository;
 
 public class SplashActivity extends AppCompatActivity {
     @Override
@@ -17,12 +17,12 @@ public class SplashActivity extends AppCompatActivity {
 
         final Button open = findViewById(R.id.open);
         open.setOnClickListener((Button) -> {
-            UserSession.getInstance(SplashActivity.this).setLoggedIn(true);
+            DiskBasedUserRepository.getInstance(SplashActivity.this).login();
 
             openAcccountActivity();
         });
 
-        if (UserSession.getInstance(this).isLoggedIn()) {
+        if (DiskBasedUserRepository.getInstance(this).loadLoginValue()) {
             openAcccountActivity();
         }
     }
