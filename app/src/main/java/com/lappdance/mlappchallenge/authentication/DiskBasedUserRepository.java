@@ -1,6 +1,5 @@
 package com.lappdance.mlappchallenge.authentication;
 
-import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -14,8 +13,7 @@ import android.support.annotation.VisibleForTesting;
  * This could be replaced by a Dagger singleton; I'll do that in the next pass if I have time.
  */
 public class DiskBasedUserRepository implements UserRepository {
-    @VisibleForTesting
-    static final String KEY_IS_LOGGED_IN = "c.l.m.a.usersession.isloggedin";
+    private static final String KEY_IS_LOGGED_IN = "c.l.m.a.usersession.isloggedin";
 
     /** Lock for multi-threading. */
     @NonNull
@@ -38,12 +36,12 @@ public class DiskBasedUserRepository implements UserRepository {
         this(PreferenceManager.getDefaultSharedPreferences(context));
     }
 
-    @VisibleForTesting
-    public DiskBasedUserRepository(@NonNull SharedPreferences preferences) {
+    private DiskBasedUserRepository(@NonNull SharedPreferences preferences) {
         mPreferences = preferences;
     }
 
     @NonNull
+    @VisibleForTesting(otherwise = VisibleForTesting.PACKAGE_PRIVATE)
     public static DiskBasedUserRepository getInstance(@NonNull Context context) {
         synchronized (sLock) {
             if (sInstance == null) {
@@ -63,30 +61,25 @@ public class DiskBasedUserRepository implements UserRepository {
 
     @NonNull
     @Override
-    public LiveData<Boolean> isLoggedIn() {
+    public MutableLiveData<Boolean> isLoggedIn() {
         if (mSessionData == null) {
             mSessionData = new MutableLiveData<>();
-            mSessionData.setValue(loadLoginValue());
+
+            final boolean isLoggedIn = mPreferences.getBoolean(KEY_IS_LOGGED_IN, false);
+            mSessionData.setValue(isLoggedIn);
         }
 
         return mSessionData;
     }
 
     @Override
-    public void login() {
-        saveLoginValue(true);
-    }
-
-    @Override
-    public void logout() {
-        saveLoginValue(false);
-    }
-
-    public boolean loadLoginValue() {
-        return mPreferences.getBoolean(KEY_IS_LOGGED_IN, false);
-    }
-
-    private void saveLoginValue(boolean isLoggedIn) {
+    public void setLoggedIn(boolean isLoggedIn) {
         mPreferences.edit().putBoolean(KEY_IS_LOGGED_IN, isLoggedIn).apply();
+        isLoggedIn().setValue(isLoggedIn);
+    }
+
+    @VisibleForTesting
+    public void setLoggedIn(MutableLiveData<Boolean> sessionData) {
+        mSessionData = sessionData;
     }
 }

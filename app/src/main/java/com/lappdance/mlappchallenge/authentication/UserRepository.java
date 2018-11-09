@@ -6,6 +6,5 @@ import android.support.annotation.NonNull;
 public interface UserRepository {
     @NonNull
     LiveData<Boolean> isLoggedIn();
-    void login();
-    void logout();
+    void setLoggedIn(boolean isLoggedIn);
 }
