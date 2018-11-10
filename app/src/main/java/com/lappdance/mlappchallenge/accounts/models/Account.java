@@ -1,6 +1,7 @@
 package com.lappdance.mlappchallenge.accounts.models;
 
 import android.support.annotation.Keep;
+import android.support.annotation.Nullable;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -35,5 +36,18 @@ public class Account {
 
     public double getBalance() {
         return balance;
+    }
+
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        if (!(obj instanceof Account)) {
+            return false;
+        }
+
+        final Account other = (Account)obj;
+        return displayName.equals(other.displayName) &&
+                number.equals(other.number) &&
+                id == other.id &&
+                balance == other.balance;
     }
 }

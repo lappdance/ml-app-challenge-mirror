@@ -1,4 +1,4 @@
-package com.lappdance.mlappchallenge.accounts;
+package com.lappdance.mlappchallenge.accounts.presenters;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
