@@ -41,7 +41,6 @@ public class DiskBasedUserRepository implements UserRepository {
     }
 
     @NonNull
-    @VisibleForTesting(otherwise = VisibleForTesting.PACKAGE_PRIVATE)
     public static DiskBasedUserRepository getInstance(@NonNull Context context) {
         synchronized (sLock) {
             if (sInstance == null) {

@@ -1,14 +1,12 @@
-package com.lappdance.mlappchallenge.accounts;
+package com.lappdance.mlappchallenge.accounts.providers;
 
 import com.lappdance.mlappchallenge.accounts.models.Account;
+import com.lappdance.mlappchallenge.accounts.providers.AssetsAccountRepository;
 
 import org.hamcrest.collection.IsCollectionWithSize;
-import org.hamcrest.core.Is;
-import org.hamcrest.number.IsCloseTo;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 

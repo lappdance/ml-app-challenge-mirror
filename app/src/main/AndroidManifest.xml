@@ -12,7 +12,7 @@
         tools:ignore="GoogleAppIndexingWarning">
 
         <activity
-            android:name=".SplashActivity">
+            android:name=".splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -20,7 +20,7 @@
         </activity>
 
         <activity
-            android:name=".AccountActivity"
+            android:name=".accounts.AccountActivity"
             android:label="@string/accounts_myAccounts" />
     </application>
 </manifest>

@@ -1,4 +1,4 @@
-package com.lappdance.mlappchallenge.accounts;
+package com.lappdance.mlappchallenge.accounts.providers;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

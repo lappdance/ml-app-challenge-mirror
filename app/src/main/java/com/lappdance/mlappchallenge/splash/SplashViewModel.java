@@ -1,15 +1,18 @@
-package com.lappdance.mlappchallenge.authentication;
+package com.lappdance.mlappchallenge.splash;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 import android.support.annotation.NonNull;
 
-public class UserViewModel extends AndroidViewModel {
+import com.lappdance.mlappchallenge.authentication.DiskBasedUserRepository;
+import com.lappdance.mlappchallenge.authentication.UserRepository;
+
+public class SplashViewModel extends AndroidViewModel {
     @NonNull
     private final UserRepository mUserRepository;
 
-    public UserViewModel(@NonNull Application application) {
+    public SplashViewModel(@NonNull Application application) {
         super(application);
         mUserRepository = DiskBasedUserRepository.getInstance(application);
     }
@@ -20,9 +23,5 @@ public class UserViewModel extends AndroidViewModel {
 
     public void login() {
         mUserRepository.setLoggedIn(true);
-    }
-
-    public void logout() {
-        mUserRepository.setLoggedIn(false);
     }
 }

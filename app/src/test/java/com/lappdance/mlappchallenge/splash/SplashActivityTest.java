@@ -1,4 +1,4 @@
-package com.lappdance.mlappchallenge;
+package com.lappdance.mlappchallenge.splash;
 
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModelProviders;
@@ -6,8 +6,11 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.widget.Button;
 
+import com.lappdance.mlappchallenge.R;
+import com.lappdance.mlappchallenge.accounts.AccountActivity;
 import com.lappdance.mlappchallenge.authentication.DiskBasedUserRepository;
-import com.lappdance.mlappchallenge.authentication.UserViewModel;
+import com.lappdance.mlappchallenge.splash.SplashViewModel;
+import com.lappdance.mlappchallenge.splash.SplashActivity;
 
 import org.junit.After;
 import org.junit.Before;
@@ -31,7 +34,7 @@ import static org.robolectric.Shadows.shadowOf;
 public class SplashActivityTest {
 
     private ActivityController<SplashActivity> mController;
-    private UserViewModel mViewModel;
+    private SplashViewModel mViewModel;
 
     private MutableLiveData<Boolean> mNoSession;
     private MutableLiveData<Boolean> mActiveSession;
@@ -48,7 +51,7 @@ public class SplashActivityTest {
 
         mController = Robolectric.buildActivity(SplashActivity.class);
 
-        mViewModel = ViewModelProviders.of(mController.get()).get(UserViewModel.class);
+        mViewModel = ViewModelProviders.of(mController.get()).get(SplashViewModel.class);
     }
 
     @After
