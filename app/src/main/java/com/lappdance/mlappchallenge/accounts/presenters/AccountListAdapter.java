@@ -14,17 +14,7 @@ import com.lappdance.mlappchallenge.accounts.views.AccountCardViewHolder;
 public class AccountListAdapter extends ListAdapter<Account, AccountCardViewHolder> {
 
     public AccountListAdapter() {
-        super(new DiffUtil.ItemCallback<Account>() {
-            @Override
-            public boolean areItemsTheSame(@NonNull Account account, @NonNull Account t1) {
-                return false;
-            }
-
-            @Override
-            public boolean areContentsTheSame(@NonNull Account account, @NonNull Account t1) {
-                return false;
-            }
-        });
+        super(new ItemCallback());
     }
 
     @NonNull
