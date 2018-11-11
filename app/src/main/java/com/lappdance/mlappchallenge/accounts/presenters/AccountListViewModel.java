@@ -13,10 +13,14 @@ import java.util.List;
 
 public class AccountListViewModel extends AndroidViewModel {
     private MutableLiveData<List<Account>> accounts;
+    private MutableLiveData<Account> selectedAccount = new MutableLiveData<>();
+
     private final AssetsAccountRepository repo = new AssetsAccountRepository();
 
     public AccountListViewModel(@NonNull Application application) {
         super(application);
+
+        selectedAccount.setValue(null);
     }
 
     public LiveData<List<Account>> getAccounts() {
@@ -26,5 +30,13 @@ public class AccountListViewModel extends AndroidViewModel {
         }
 
         return accounts;
+    }
+
+    public LiveData<Account> getSelectedAccount() {
+        return selectedAccount;
+    }
+
+    public void selectAccount(@NonNull Account account) {
+        selectedAccount.setValue(account);
     }
 }

@@ -13,6 +13,8 @@ import com.lappdance.mlappchallenge.accounts.views.AccountCardViewHolder;
 
 public class AccountListAdapter extends ListAdapter<Account, AccountCardViewHolder> {
 
+    private AccountSelectedListener mListener;
+
     public AccountListAdapter() {
         super(new ItemCallback());
     }
@@ -30,6 +32,16 @@ public class AccountListAdapter extends ListAdapter<Account, AccountCardViewHold
         viewHolder.setName(account.getDisplayName());
         viewHolder.setNumber(account.getNumber());
         viewHolder.setBalance(account.getBalance());
+
+        viewHolder.itemView.setOnClickListener( (View) -> {
+            if (mListener != null) {
+                mListener.onAccountSelected(account);
+            }
+        });
+    }
+
+    public void setAccountSelectedListener(@NonNull AccountSelectedListener listener) {
+        mListener = listener;
     }
 
     private static class ItemCallback extends DiffUtil.ItemCallback<Account> {
@@ -42,5 +54,9 @@ public class AccountListAdapter extends ListAdapter<Account, AccountCardViewHold
         public boolean areContentsTheSame(@NonNull Account left, @NonNull Account right) {
             return left.equals(right);
         }
+    }
+
+    public interface AccountSelectedListener {
+        void onAccountSelected(@NonNull Account account);
     }
 }
