@@ -1,5 +1,6 @@
 package com.lappdance.mlappchallenge.accounts.views;
 
+import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -25,5 +26,14 @@ public class TransactionCardViewHolder extends RecyclerView.ViewHolder {
 
     public void setAmount(double amount) {
         this.amount.setText(Utils.formattedCurrency(amount));
+
+        final @ColorRes int colour;
+        if (amount < 0) {
+            colour = R.color.withdrawal;
+        } else {
+            colour = R.color.deposit;
+        }
+
+        this.amount.setTextColor(this.amount.getContext().getResources().getColor(colour));
     }
 }

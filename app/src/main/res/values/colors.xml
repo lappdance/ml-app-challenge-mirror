@@ -4,4 +4,6 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="negativeBalance">#bf1c1c</color>
+    <color name="deposit">#43a43e</color>
+    <color name="withdrawal">#8f0404</color>
 </resources>

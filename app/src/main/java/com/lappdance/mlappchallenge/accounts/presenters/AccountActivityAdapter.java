@@ -53,7 +53,7 @@ public class AccountActivityAdapter extends ListAdapter<AccountActivityAdapter.H
 
             vh.setDescription(hd.data.getDescription());
             if (hd.data.getAmountWithdrawn() > 0) {
-                vh.setAmount(hd.data.getAmountWithdrawn());
+                vh.setAmount(hd.data.getAmountWithdrawn() * -1);
             } else {
                 vh.setAmount(hd.data.getAmountDeposited());
             }
