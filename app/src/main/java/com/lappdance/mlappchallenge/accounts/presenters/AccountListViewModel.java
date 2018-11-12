@@ -9,6 +9,8 @@ import android.support.annotation.NonNull;
 import com.lappdance.mlappchallenge.accounts.models.Account;
 import com.lappdance.mlappchallenge.accounts.models.DailyActivity;
 import com.lappdance.mlappchallenge.accounts.providers.AssetsAccountRepository;
+import com.lappdance.mlappchallenge.authentication.DiskBasedUserRepository;
+import com.lappdance.mlappchallenge.authentication.UserRepository;
 
 import java.util.List;
 
@@ -17,11 +19,13 @@ public class AccountListViewModel extends AndroidViewModel {
     private MutableLiveData<List<DailyActivity>> accountActivity = new MutableLiveData<>();
     private MutableLiveData<Account> selectedAccount = new MutableLiveData<>();
 
+    private final UserRepository mUserRepository;
     private final AssetsAccountRepository repo = new AssetsAccountRepository();
 
     public AccountListViewModel(@NonNull Application application) {
         super(application);
 
+        mUserRepository = DiskBasedUserRepository.getInstance(application);
         selectedAccount.setValue(null);
     }
 
@@ -45,5 +49,13 @@ public class AccountListViewModel extends AndroidViewModel {
     public void selectAccount(@NonNull Account account) {
         selectedAccount.setValue(account);
         accountActivity.setValue(repo.getAccountActivity(getApplication(), account.getId()));
+    }
+
+    public LiveData<Boolean> getUserSession() {
+        return mUserRepository.isLoggedIn();
+    }
+
+    public void logout() {
+        mUserRepository.setLoggedIn(false);
     }
 }

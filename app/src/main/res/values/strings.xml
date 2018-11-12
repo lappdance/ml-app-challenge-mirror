@@ -3,4 +3,5 @@
 
     <string name="splash_open">Open</string>
     <string name="accounts_myAccounts">My Accounts</string>
+    <string name="accounts_quit">Quit</string>
 </resources>
