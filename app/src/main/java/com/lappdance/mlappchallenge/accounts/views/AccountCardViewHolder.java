@@ -6,8 +6,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.lappdance.mlappchallenge.R;
-
-import java.util.Locale;
+import com.lappdance.mlappchallenge.Utils;
 
 public class AccountCardViewHolder extends RecyclerView.ViewHolder {
     private final TextView name;
@@ -27,7 +26,7 @@ public class AccountCardViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void setBalance(double balance) {
-        this.balance.setText(String.format(Locale.getDefault(), "$%.2f", balance));
+        this.balance.setText(Utils.formattedCurrency(balance));
     }
 
     public void setNumber(@NonNull String formattedNumber) {

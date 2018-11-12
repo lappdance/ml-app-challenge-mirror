@@ -5,6 +5,10 @@ import android.support.annotation.NonNull;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Nullable;
 
+import java.text.NumberFormat;
+import java.util.Currency;
+import java.util.Locale;
+
 public class Utils {
 
     /**
@@ -19,5 +23,11 @@ public class Utils {
         if (any == null) {
             throw new IllegalStateException(message);
         }
+    }
+
+    @NonNull
+    public static String formattedCurrency(double amount) {
+        final NumberFormat formatter = NumberFormat.getCurrencyInstance(Locale.getDefault());
+        return formatter.format(amount);
     }
 }

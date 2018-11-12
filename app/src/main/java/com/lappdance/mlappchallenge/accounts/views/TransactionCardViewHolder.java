@@ -6,8 +6,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.lappdance.mlappchallenge.R;
-
-import java.util.Locale;
+import com.lappdance.mlappchallenge.Utils;
 
 public class TransactionCardViewHolder extends RecyclerView.ViewHolder {
     private final TextView amount;
@@ -25,6 +24,6 @@ public class TransactionCardViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void setAmount(double amount) {
-        this.amount.setText(String.format(Locale.getDefault(), "$%.2f", amount));
+        this.amount.setText(Utils.formattedCurrency(amount));
     }
 }
