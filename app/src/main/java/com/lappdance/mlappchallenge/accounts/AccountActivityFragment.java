@@ -45,8 +45,6 @@ public class AccountActivityFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         Utils.requireNonNull(getActivity(), REQUIRES_ACTIVITY);
 
-        getActivity().setTitle(R.string.accounts_myAccounts);
-
         final RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
 
         final AccountActivityAdapter adapter = new AccountActivityAdapter();
@@ -55,6 +53,14 @@ public class AccountActivityFragment extends Fragment {
         mViewModel.getAccountActivity().observe(this, (activities) ->
                 adapter.submitList(flattenTransactions(activities))
         );
+
+        mViewModel.getSelectedAccount().observe(this, (account) -> {
+            if (account == null) {
+                getActivity().setTitle("");
+            } else {
+                getActivity().setTitle(account.getDisplayName());
+            }
+        });
     }
 
     @VisibleForTesting
