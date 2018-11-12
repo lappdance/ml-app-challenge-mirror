@@ -44,6 +44,6 @@ public class AccountListViewModel extends AndroidViewModel {
 
     public void selectAccount(@NonNull Account account) {
         selectedAccount.setValue(account);
-        accountActivity.setValue(repo.getAccountActivity(getApplication(), account));
+        accountActivity.setValue(repo.getAccountActivity(getApplication(), account.getId()));
     }
 }

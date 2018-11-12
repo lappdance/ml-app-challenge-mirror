@@ -6,6 +6,7 @@ import android.util.Log;
 import android.util.SparseArray;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.lappdance.mlappchallenge.accounts.models.Account;
 import com.lappdance.mlappchallenge.accounts.models.DailyActivity;
@@ -49,14 +50,16 @@ public class AssetsAccountRepository implements AccountRepository {
 
     @NonNull
     @Override
-    public List<DailyActivity> getAccountActivity(@NonNull Context context, @NonNull Account account) {
+    public List<DailyActivity> getAccountActivity(@NonNull Context context, int id) {
         try {
-            final String filename = ACCOUNT_MAP.get(account.getId());
+            final String filename = ACCOUNT_MAP.get(id);
             final InputStream in = context.getAssets().open(filename);
 
             final Type listOfDailyActivities = new TypeToken<List<DailyActivity>>(){}.getType();
 
-            final Gson gson = new Gson();
+            final Gson gson = new GsonBuilder()
+                    .setDateFormat("yyyy-MM-dd")
+                    .create();
             final InputStreamReader reader = new InputStreamReader(in);
 
             return gson.fromJson(reader, listOfDailyActivities);

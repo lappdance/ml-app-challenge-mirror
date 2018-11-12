@@ -13,5 +13,5 @@ public interface AccountRepository {
     List<Account> loadAccounts(@NonNull Context context);
 
     @NonNull
-    List<DailyActivity> getAccountActivity(@NonNull Context context, @NonNull Account account);
+    List<DailyActivity> getAccountActivity(@NonNull Context context, int accountId);
 }
