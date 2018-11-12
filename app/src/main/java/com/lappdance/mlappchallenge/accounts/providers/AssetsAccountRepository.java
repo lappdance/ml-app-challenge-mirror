@@ -26,7 +26,7 @@ public class AssetsAccountRepository implements AccountRepository {
     static {
         ACCOUNT_MAP.put(10, "chequingAccount.json");
         ACCOUNT_MAP.put(12, "savingsAccount.json");
-        ACCOUNT_MAP.put(19, "TsaAccount.json");
+        ACCOUNT_MAP.put(19, "TfsaAccount.json");
     }
 
     @Override
